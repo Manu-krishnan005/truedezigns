@@ -1,0 +1,156 @@
+/* CSS Custom Properties for easy theme changes */
+:root {
+    --primary-color: #000000;
+    --secondary-color: #D3A26D; /* Placeholder for a subtle accent color */
+    --light-bg: #f5f5f5;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--primary-color);
+    background-color: #ffffff;
+}
+
+/* Custom style to replicate the large, spaced out typography seen in the original site */
+.hero-title {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0.2em; /* Wide letter spacing for headings */
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Sticky Header */
+#header {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Mega Menu Styling for the main navigation dropdowns */
+.mega-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 50;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Show the mega menu on hover of the parent list item */
+.group:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Aspect ratio for the product/category cards for consistent image sizing */
+.card-image {
+    aspect-ratio: 3 / 4; /* Portrait ratio for fashion images */
+    object-fit: cover;
+}
+
+/* Hero Image overlay and content positioning */
+.hero-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Subtle dark overlay */
+}
+
+/* Text overlay for the category grid */
+.category-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s;
+}
+
+.category-card:hover .category-overlay {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Spinner */
+.loader {
+    border-top-color: #000;
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
+}
+@-webkit-keyframes spinner {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Full Screen Search & Modal Overlay Styling */
+#search-overlay, .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 60;
+    display: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+#search-overlay.is-active, .modal-overlay.is-active {
+    display: block;
+    opacity: 1;
+}
+
+/* General Modal Container Styling */
+.modal-container {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+/* Cart Modal Specific Styling (Slide-out from right) */
+#cart-modal-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 450px; /* Standard sidebar width */
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 70; /* Above overlay */
+}
+.modal-overlay.is-active #cart-modal-container {
+    transform: translateX(0);
+}
+
+/* Style for the partner logos grid */
+.partner-grid img {
+    width: 150px; /* Fixed width for partner logos */
+    height: auto;
+    margin: 0 auto;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+}
+.partner-grid img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Custom styles for the icons in the "How It Works" section */
+.how-it-works-icon {
+    font-size: 3rem; /* Large icon size */
+    margin: 0 auto 1rem; /* Center and add spacing */
+    display: block;
+}
