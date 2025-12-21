@@ -154,3 +154,82 @@ body {
     margin: 0 auto 1rem; /* Center and add spacing */
     display: block;
 }
+
+.college-logo {
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.college-logo:hover {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* Card lift effect */
+.gown-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gown-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.gown-card img {
+  transition: transform 0.4s ease;
+}
+
+.gown-card:hover img {
+  transform: scale(1.03);
+}
+
+/* =============================== */
+/* College Card Image Carousel */
+/* =============================== */
+
+.college-image-carousel {
+  position: relative;
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+}
+
+.college-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.college-slide.active {
+  opacity: 1;
+}
+
+
+/* =============================== */
+/* Sliding Image Carousel (Card) */
+/* =============================== */
+
+.college-image-carousel {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+}
+
+.college-slide-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.8s ease-in-out;
+}
+
+.college-slide-img {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+

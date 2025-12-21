@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>True Designs</title>
+    <title>True Dezigns</title>
 
     <!-- Local CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
@@ -62,10 +62,7 @@
             <div id="cart-items-list" class="flex-grow overflow-y-auto py-6 space-y-4"></div>
 
             <div class="pt-4 border-t border-gray-200">
-                <div class="flex justify-between font-bold text-lg mb-4">
-                    <span>Subtotal:</span>
-                    <span id="cart-total-amount">Rs. 0.00</span>
-                </div>
+                
                 <button id="checkout-btn"
   onclick="checkoutViaWhatsApp()"
   class="w-full bg-black text-white font-medium text-sm tracking-widest py-3 rounded-lg hover:bg-gray-800 transition duration-300 uppercase">
@@ -85,8 +82,16 @@
     <!-- Header -->
     <header id="header" class="sticky top-0 bg-white shadow-sm z-40">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
-            <div class="text-xl font-bold tracking-widest uppercase cursor-pointer" onclick="window.location.hash = 'home'">
-                True Designs<span class="text-xs block leading-none font-normal">.COM</span>
+            <div class="flex items-center space-x-3 cursor-pointer"
+     onclick="window.location.hash = 'home'">
+
+    <!-- Logo Image -->
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+     alt="True Dezigns Logo"
+     class="h-16 w-auto object-contain">
+
+</div>
+
             </div>
 
             <div class="hidden lg:flex space-x-8 h-full items-center">
@@ -100,12 +105,13 @@
                                 <li><a href="#category/kids-gowns" class="hover:text-gray-500 nav-link">Kids Gowns</a></li>
                                 <li><a href="#category/guest-gowns" class="hover:text-gray-500 nav-link">Guest Gowns</a></li>
                                 <li><a href="#category/faculty-gowns" class="hover:text-gray-500 nav-link">Faculty Gowns</a></li>
+                                <li><a href="#category/phd-gowns" class="hover:text-gray-500 nav-link">PhD Gowns</a></li>
                             </ul>
                         </div>
                         <div>
-                            <p class="font-bold text-sm uppercase mb-3">ACCESSORIES</p>
+                            <p class="font-bold text-sm uppercase mt-6 mb-3">ACCESSORIES</p>
                             <ul class="text-sm space-y-2">
-                                <li><a href="#category/customised-shawls" class="hover:text-gray-500 nav-link">Customised Shawls</a></li>
+                                <li><a href="#category/customised-Hoodies" class="hover:text-gray-500 nav-link">Customised Hoodies</a></li>
                                 <li><a href="#category/framed-certificate" class="hover:text-gray-500 nav-link">Framed Certificate with Medals</a></li>
                                 <li><a href="#category/convocation-files" class="hover:text-gray-500 nav-link">Convocation Files</a></li>
                             </ul>
@@ -114,16 +120,16 @@
                 </div>
 
                 <div class="relative group h-full flex items-center">
-                    <a href="#cause" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300 py-2 nav-link">Rent For A Cause</a>
+                    <a href="#cause/gowns" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300">Contact Us</a>
                     <div class="mega-menu absolute top-full mt-0 w-48 bg-white border border-gray-200 shadow-xl p-4 hidden group-hover:block">
                         <ul class="text-sm space-y-2">
-                            <li><a href="#cause/about" class="hover:text-gray-500 nav-link">About</a></li>
+                            <li><a href="#cause/about" class="hover:text-gray-500 nav-link"></a></li>
                             <li><a href="#cause/gowns" class="hover:text-gray-500 nav-link">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
 
-                <a href="#blog" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300 nav-link">Blog</a>
+                <a href="#blog" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300 nav-link">Collaborations</a>
             </div>
 
             <div class="flex items-center space-x-4 text-gray-800">
@@ -157,7 +163,7 @@
     <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 z-50 bg-white p-6 pt-24 space-y-4 shadow-2xl transition duration-300 transform translate-x-full">
         <a href="#cause/about" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">About</a>
         <a href="#category/gowns" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">Gowns</a>
-        <a href="#blog" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">Blog</a>
+        <a href="#blog" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">Collaborations</a>
     </div>
 
     <main>
@@ -244,7 +250,7 @@
 
                         <div class="mt-12">
                             <p class="text-base font-semibold">Premium Kids Graduation Dress</p>
-                            <p class="text-gray-700 text-sm">Rs. 2,800.00</p>
+                            <p class="text-gray-700 text-sm"></p>
                         </div>
                     </div>
 
@@ -302,15 +308,15 @@
                         </div>
                     </a>
 
-                    <!-- Accessories row (3 items): customised shawls, framed certificates, convocation files -->
-                    <a href="#category/customised-shawls" class="relative category-card overflow-hidden rounded-lg group">
+                    <!-- Accessories row (3 items): customised Hoodies, framed certificates, convocation files -->
+                    <a href="#category/customised-Hoodies" class="relative category-card overflow-hidden rounded-lg group">
                         <div class="absolute inset-0">
                             <img src="{{ url_for('static', filename='images/products/stoles.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Customised Shawls" onerror="this.src='{{ url_for('static', filename='images/default-accessory.jpg') }}'">
                         </div>
                         <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-6">
                             <p class="text-xs uppercase tracking-widest mb-1 text-white">ACCENTS & ACCESSORIES</p>
-                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Customised Shawls</h3>
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Customised Hoodies</h3>
                         </div>
                     </a>
 
@@ -366,10 +372,44 @@
                 <div>
                     <h4 class="text-sm font-bold uppercase mb-4 tracking-wider">Connect</h4>
                     <ul class="space-y-2 text-sm text-gray-300">
-                        <li><a href="#" class="hover:text-white">Instagram</a></li>
-                        <li><a href="#" class="hover:text-white">Facebook</a></li>
-                        <li><a href="#" class="hover:text-white">Pinterest</a></li>
-                        <li><a href="mailto:truedesignstvm@gmail.com" class="hover:text-white">Email Us</a></li>
+                        <li>
+  <a href="https://www.instagram.com/truedesignsconvo?igsh=ZHlwbTQ3a296ZHN0"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="hover:text-white flex items-center">
+     
+     <i class="fa-brands fa-instagram mr-2"></i>
+     Instagram
+
+  </a>
+</li>
+
+</li>
+
+                        <li>
+  <a href="https://www.facebook.com/truedesigns"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="hover:text-white flex items-center">
+     
+     <i class="fa-brands fa-facebook mr-2"></i>
+     Facebook
+
+  </a>
+</li>
+
+                        <li>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=truedesignstvm@gmail.com"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="hover:text-white flex items-center">
+
+    <i class="fa-solid fa-envelope mr-2"></i>
+    Email Us
+
+  </a>
+</li>
+
                     </ul>
                 </div>
                 <div>
@@ -382,7 +422,7 @@
             </div>
 
             <div class="text-center text-sm text-gray-500">
-                &copy; 2025 True Designs. All Rights Reserved.
+                &copy; 2025 True Dezigns. All Rights Reserved.
             </div>
         </div>
     </footer>

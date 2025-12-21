@@ -15,69 +15,72 @@ const PRODUCTS = {
     key: 'student-gown-black',
     name: 'Standard Student Gown',
     category: 'Student Gowns',
-    price: '1500.00',
     designer: 'True Designs Exclusive',
-    currency: 'Rs.',
     images: ['/static/images/products/student-gown-1.jpg','/static/images/products/student-gown-2.jpg','/static/images/products/student-gown-3.jpg'],
     description: 'A classic black graduation gown suitable for all students. Comes with a matching cap and tassel.',
     rentalOptions: { durations: ['3 Days','5 Days'], sizes: ['XS','S','M','L','XL'] },
     keywords: ['student','gown','black','graduation','academic']
   },
-  'guest-gown-blue': {
-    key: 'guest-gown-blue',
-    name: 'Blue Guest Gown',
+  'guest-gown': {
+    key: 'guest-gown',
+    name: 'Guest Gown',
     category: 'Guest Gowns',
-    price: '1800.00',
     designer: 'Elegant Wear',
-    currency: 'Rs.',
     images: ['/static/images/products/guest-gown-1.jpg'],
     description: 'A stylish blue gown for guests and attendees.',
     rentalOptions: { durations: ['3 Days','5 Days'], sizes: ['M','L','XL'] },
-    keywords: ['guest','gown','blue','ceremony']
+    keywords: ['guest','gown','ceremony']
   },
-  'faculty-gown-red': {
-    key: 'faculty-gown-red',
-    name: 'Red Faculty Gown',
+  'faculty-gown': {
+    key: 'faculty-gown',
+    name: 'Faculty Gown',
     category: 'Faculty Gowns',
-    price: '2500.00',
     designer: 'Prestigious Attire',
-    currency: 'Rs.',
     images: ['/static/images/products/faculty-gown-1.jpg'],
     description: 'A traditional red faculty gown.',
     rentalOptions: { durations: ['3 Days'], sizes: ['M','L'] },
-    keywords: ['faculty','gown','red']
+    keywords: ['faculty','gown']
   },
   'kids-gown-standard': {
     key: 'kids-gown-standard',
     name: 'Standard Kids Gown',
     category: 'Kids Gowns',
-    price: '1000.00',
     designer: 'True Designs Kids',
-    currency: 'Rs.',
     images: ['/static/images/products/kids-gown-1.jpg'],
     description: 'Comfortable and cute graduation gown for kids.',
     rentalOptions: { durations: ['3 Days','5 Days'], sizes: ['XS','S','M'] },
     keywords: ['kids','gown','children']
   },
-  'customised-shawl-1': {
-    key: 'customised-shawl-1',
-    name: 'Customised Shawl',
-    category: 'Customised Shawls',
-    price: '800.00',
-    designer: 'True Designs Exclusive',
-    currency: 'Rs.',
+
+  'phd-gown-black': {
+  key: 'phd-gown-black',
+  name: 'Standard PhD Gown',
+  category: 'PhD Gowns',
+  designer: 'True Designs Prestige',
+  images: ['/static/images/products/phd-gown-1.jpg'],
+  description: 'Premium PhD graduation gown designed for doctoral ceremonies with elegant detailing.',
+  rentalOptions: {
+    durations: ['3 Days', '5 Days'],
+    sizes: ['S', 'M', 'L', 'XL']
+  },
+  keywords: ['phd', 'doctoral', 'gown', 'graduation']
+  },
+
+  'customised-Hoodies-1': {
+    key: 'customised-Hoodies-1',
+    name: 'Customised Hoodies',
+    category: 'Customised Hoodies',
+    designer: 'True Dezigns Exclusive',
     images: ['/static/images/products/stoles.jpg'],
-    description: 'Personalised shawl for convocation ceremonies.',
+    description: 'Personalised Hoodies for convocation ceremonies.',
     rentalOptions: { durations: ['3 Days'], sizes: ['Free Size'] },
-    keywords: ['shawl','customised']
+    keywords: ['Hoodies','customised']
   },
   'framed-certificate-1': {
     key: 'framed-certificate-1',
     name: 'Framed Certificate with Medal Set',
     category: 'Framed Certificate with Medals',
-    price: '1200.00',
     designer: 'True Designs',
-    currency: 'Rs.',
     images: ['/static/images/products/framed-certificate-1.jpg'],
     description: 'Beautifully framed certificate with medals.',
     rentalOptions: { durations: ['Permanent Purchase'] },
@@ -87,9 +90,7 @@ const PRODUCTS = {
     key: 'convocation-file-1',
     name: 'Convocation File',
     category: 'Convocation Files',
-    price: '500.00',
     designer: 'True Designs Stationery',
-    currency: 'Rs.',
     images: ['/static/images/products/convocation-file-1.jpg'],
     description: 'Premium convocation file with branding.',
     rentalOptions: { durations: ['Permanent Purchase'] },
@@ -100,13 +101,14 @@ const PRODUCTS = {
 /* ---------- CATEGORY MAP ---------- */
 const CATEGORY_MAP = {
   'student-gowns': { title: 'Student Gowns', productKeys: ['student-gown-black'] },
-  'guest-gowns': { title: 'Guest Gowns', productKeys: ['guest-gown-blue'] },
-  'faculty-gowns': { title: 'Faculty Gowns', productKeys: ['faculty-gown-red'] },
+  'guest-gowns': { title: 'Guest Gowns', productKeys: ['guest-gown'] },
+  'faculty-gowns': { title: 'Faculty Gowns', productKeys: ['faculty-gown'] },
   'kids-gowns': { title: 'Kids Gowns', productKeys: ['kids-gown-standard'] },
-  'customised-shawls': { title: 'Customised Shawls', productKeys: ['customised-shawl-1'] },
+  'phd-gowns': {title: 'PhD Gowns',productKeys: ['phd-gown-black']},
+  'customised-Hoodies': { title: 'Customised Hoodies', productKeys: ['customised-Hoodies-1'] },
   'framed-certificate': { title: 'Framed Certificate with Medals', productKeys: ['framed-certificate-1'] },
   'convocation-files': { title: 'Convocation Files', productKeys: ['convocation-file-1'] },
-  'gowns': { title: 'All Gowns', productKeys: ['student-gown-black','guest-gown-blue','faculty-gown-red','kids-gown-standard'] },
+  'gowns': { title: 'All Gowns', productKeys: ['student-gown-black','guest-gown','faculty-gown','kids-gown-standard','phd-gown-black'] },
   'default': { title: 'Product Listing', productKeys: Object.keys(PRODUCTS) }
 };
 
@@ -120,52 +122,71 @@ function getProductByKey(key) { return PRODUCTS[key] || null; }
 function renderCart() {
   const list = document.getElementById('cart-items-list');
   const countSpan = document.getElementById('cart-count');
-  const totalSpan = document.getElementById('cart-total-amount');
-  if (!list || !countSpan || !totalSpan) return;
+  if (!list || !countSpan) return;
 
-  let total = 0;
-  countSpan.textContent = cartItems.length;
+  countSpan.textContent = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
 
   if (cartItems.length === 0) {
-    list.innerHTML = '<p class="text-center text-gray-500 mt-10">Your bag is empty. Start renting!</p>';
-    totalSpan.textContent = 'Rs. 0.00';
+    list.innerHTML =
+      '<p class="text-center text-gray-500 mt-10">Your bag is empty. Start renting!</p>';
     return;
   }
 
-  const itemsHtml = cartItems.map((item, index) => {
+  list.innerHTML = cartItems.map((item, index) => {
     const product = getProductByKey(item.productKey);
     if (!product) return '';
-    const price = parseFloat(product.price || 0);
-    total += price;
-    return `
-      <div class="flex space-x-4 border-b pb-4">
-       <img src="${product.images[0]}"
-     class="w-full h-full object-cover object-center"
-     alt="${product.name}">
 
-        <div class="flex-grow">
-          <p class="font-semibold text-sm">${product.name}</p>
-          <p class="text-xs text-gray-600">Size: ${item.size} | Duration: ${item.duration}</p>
-          <p class="text-sm font-medium mt-1">${product.currency} ${price.toFixed(2)}</p>
-          <div class="flex space-x-2 mt-2">
-            <button onclick="removeItemFromCart(${index})" class="text-red-500 text-xs hover:underline">Remove</button>
-          </div>
-        </div>
+   return `
+  <div class="flex space-x-4 border-b pb-4">
+    <img src="${product.images[0]}"
+         class="w-20 h-24 object-contain bg-white rounded"
+         alt="${product.name}">
+
+    <div class="flex-grow">
+      <p class="font-semibold text-sm">${product.name}</p>
+      <p class="text-xs text-gray-600">
+        Size: ${item.size} | Duration: ${item.duration}
+      </p>
+
+      <div class="flex items-center space-x-3 mt-2">
+        <button onclick="decreaseQuantity(${index})"
+                class="border px-2 rounded text-sm">−</button>
+
+        <span class="text-sm font-medium">${item.quantity}</span>
+
+        <button onclick="increaseQuantity(${index})"
+                class="border px-2 rounded text-sm">+</button>
+
+        <button onclick="removeItemFromCart(${index})"
+                class="text-red-500 text-xs ml-3 hover:underline">
+          Remove
+        </button>
       </div>
-    `;
-  }).join('');
+    </div>
+  </div>
+`;
 
-  list.innerHTML = itemsHtml;
-  totalSpan.textContent = `${cartItems[0]?.currency || 'Rs.'} ${total.toFixed(2)}`;
+  }).join('');
 }
+
 
 function addItemToCart(productKey, size, duration, startDate) {
   const product = getProductByKey(productKey);
   if (!product) { console.error("Product not found:", productKey); return; }
-  cartItems.push({ productKey, size, duration, startDate, timestamp: Date.now() });
+  cartItems.push({
+  productKey,
+  size,
+  duration,
+  startDate,
+  quantity: 1,
+  timestamp: Date.now()
+});
+
   renderCart();
   document.getElementById('cart-overlay')?.classList.add('is-active');
 }
+window.addItemToCart = addItemToCart;
 
 function removeItemFromCart(index) {
   cartItems.splice(index, 1);
@@ -173,32 +194,42 @@ function removeItemFromCart(index) {
 }
 window.removeItemFromCart = removeItemFromCart;
 
+function increaseQuantity(index) {
+  cartItems[index].quantity += 1;
+  renderCart();
+}
+
+function decreaseQuantity(index) {
+  if (cartItems[index].quantity > 1) {
+    cartItems[index].quantity -= 1;
+    renderCart();
+  }
+}
+
+/* expose for onclick */
+window.increaseQuantity = increaseQuantity;
+window.decreaseQuantity = decreaseQuantity;
+
 function checkoutViaWhatsApp() {
   if (cartItems.length === 0) {
     alert("Your cart is empty.");
     return;
   }
 
-  let message = "Hello True Designs 👋%0A";
+  let message = "Hello True Dezigns 👋%0A";
   message += "I would like to rent the following items:%0A%0A";
-
-  let total = 0;
 
   cartItems.forEach((item, index) => {
     const product = PRODUCTS[item.productKey];
     if (!product) return;
 
-    const price = parseFloat(product.price || 0);
-    total += price;
-
     message += `${index + 1}. ${product.name}%0A`;
     message += `   Size: ${item.size}%0A`;
     message += `   Duration: ${item.duration}%0A`;
     message += `   Start Date: ${item.startDate}%0A`;
-    message += `   Price: Rs. ${price.toFixed(2)}%0A%0A`;
+    message += `   Quantity: ${item.quantity}%0A%0A`;
   });
 
-  message += `Total: Rs. ${total.toFixed(2)}%0A%0A`;
   message += "Please confirm availability. Thank you! 😊";
 
   const phoneNumber = "919745845989";
@@ -206,7 +237,9 @@ function checkoutViaWhatsApp() {
 
   window.open(whatsappURL, "_blank");
 }
+
 window.checkoutViaWhatsApp = checkoutViaWhatsApp;
+
 
 /* ---------- CATEGORY / PRODUCT RENDERS ---------- */
 function renderCategoryPage(categoryKey) {
@@ -218,8 +251,8 @@ function renderCategoryPage(categoryKey) {
     if (!product) return '';
     const formattedPrice = parseFloat(product.price || 0).toFixed(2);
     return `
-      <div class="text-center">
-        <a href="#product/${product.key}" class="block group">
+  <div class="text-center gown-card">
+    <a href="#product/${product.key}" class="block group">
           <div class="relative overflow-hidden rounded-lg aspect-[3/4]">
             <img src="${product.images[0]}"
      class="w-full h-full object-contain bg-white object-center"
@@ -227,7 +260,6 @@ function renderCategoryPage(categoryKey) {
 
           </div>
           <p class="text-sm font-semibold mt-2">${product.name}</p>
-          <p class="text-xs text-gray-700">${product.currency} ${formattedPrice}</p>
           <p class="text-xs text-gray-500">${product.designer}</p>
         </a>
       </div>
@@ -306,7 +338,7 @@ function renderProductPage(productKey) {
           <h1 class="text-4xl font-bold tracking-tight mb-4">${product.name}</h1>
 
           <div class="mb-6">
-            <p class="text-xl font-semibold">Rent: ${product.currency} ${formattedPrice}</p>
+            
           </div>
 
           <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-6">
@@ -393,9 +425,18 @@ function renderPage(route = '') {
   }
 
   setTimeout(() => {
-    contentDiv.innerHTML = content;
-    if (routeType === 'product' && routeKey) initProductPageWiring(routeKey);
-  }, 100);
+  contentDiv.innerHTML = content;
+
+  if (routeType === 'product' && routeKey) {
+    initProductPageWiring(routeKey);
+  }
+
+  if (routeType === 'blog') {
+  initCollegeImageCarousels();
+}
+
+}, 100);
+
 }
 
 /* ---------- PRODUCT PAGE WIRING ---------- */
@@ -466,14 +507,14 @@ function performSearch(query) {
   }
 
   const resultHtml = matchingProducts.map(product => `
-    <a href="#product/${product.key}" class="block group p-2 rounded-lg hover:bg-gray-50 transition duration-300" onclick="document.getElementById('search-overlay')?.classList.remove('is-active')">
-      <div class="relative overflow-hidden rounded-lg aspect-[3/4]">
-        <img src="${product.images[0]}" class="w-full h-full object-cover object-center" alt="${product.name}">
-      </div>
-      <p class="text-sm font-semibold mt-2">${product.name}</p>
-      <p class="text-xs text-gray-700">${product.currency} ${parseFloat(product.price||0).toFixed(2)}</p>
-    </a>
-  `).join('');
+  <a href="#product/${product.key}" class="block group p-2 rounded-lg hover:bg-gray-50 transition duration-300">
+    <div class="relative overflow-hidden rounded-lg aspect-[3/4]">
+      <img src="${product.images[0]}" class="w-full h-full object-cover object-center" alt="${product.name}">
+    </div>
+    <p class="text-sm font-semibold mt-2">${product.name}</p>
+    <p class="text-xs text-gray-500">${product.designer}</p>
+  </a>
+`).join('');
 
   resultsDiv.innerHTML = resultHtml;
 }
@@ -518,21 +559,95 @@ function renderContactUsPage() {
   `;
 }
 
+function collegeCard(name, logo, images, description) {
+  const slides = images.map(img => `
+    <img src="${img}" class="college-slide-img" alt="${name} event">
+  `).join('');
+
+  return `
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition">
+
+      <!-- Sliding Image Carousel -->
+      <div class="college-image-carousel">
+        <div class="college-slide-track">
+          ${slides}
+        </div>
+      </div>
+
+      <div class="p-6 text-center">
+        <img src="${logo}"
+             class="college-logo h-14 mx-auto mb-4 object-contain"
+             alt="${name} logo">
+
+        <h3 class="text-lg font-bold mb-2">${name}</h3>
+        <p class="text-sm text-gray-600">${description}</p>
+      </div>
+    </div>
+  `;
+}
+
+
+
+
 function renderBlogPage() {
   return `
     <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row gap-10">
-        <div class="lg:w-1/2 bg-gray-100 p-10 rounded-lg">
-          <h2 class="section-title text-center mb-6">The True Designs Blog</h2>
-          <p class="text-gray-600">The latest in graduation wear from True Designs.</p>
-        </div>
-        <div class="lg:w-1/2 relative">
-          <img src="https://placehold.co/700x700/60a5fa/ffffff?text=Quality+Is+A+Habit" class="w-full h-full object-cover rounded-lg" alt="Quality and Designers">
-        </div>
+
+      <div class="text-center mb-16">
+        <h2 class="section-title text-4xl mb-4">Our College Collaborations</h2>
+        <p class="text-gray-600">
+          Trusted by leading institutions for graduation & convocation ceremonies
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+        <!-- College Card -->
+        ${collegeCard(
+  'Co Operative School of Law Thodupuzha',
+  'static/images/colleges/Co Operative School of Law Thodupuzha-logo.jpg',
+  [
+    'static/images/colleges/Co Operative School of Law Thodupuzha-event-1.jpg',
+    'static/images/colleges/Co Operative School of Law Thodupuzha-event-2.jpg',
+    'static/images/colleges/Co Operative School of Law Thodupuzha-event-3.jpg',
+    'static/images/colleges/Co Operative School of Law Thodupuzha-event-4.jpg',
+    'static/images/colleges/Co Operative School of Law Thodupuzha-event-5.jpg'
+  ],
+  'PhD & Faculty Convocation Ceremony'
+)}
+
+${collegeCard(
+  'Mohandas College of Engineering and Technology',
+  'static/images/colleges/mohandas college of engineering and technology-logo.jpg',
+  [
+    'static/images/colleges/mohandas college of engineering and technology-event-1.jpg',
+    'static/images/colleges/mohandas college of engineering and technology-event-2.jpg',
+    'static/images/colleges/mohandas college of engineering and technology-event-3.jpg',
+    'static/images/colleges/mohandas college of engineering and technology-event-4.jpg',
+    'static/images/colleges/mohandas college of engineering and technology-event-5.jpg'
+  ],
+  'Graduation Day – Student Gowns'
+)}
+
+${collegeCard(
+  'College of Pharmacy Kannur Medical College',
+  'static/images/colleges/college of pharmacy kannur medical college-logo.jpg',
+  [
+    'static/images/colleges/college of pharmacy kannur medical college-event-1.jpg',
+    'static/images/colleges/college of pharmacy kannur medical college-event-2.jpg',
+    'static/images/colleges/college of pharmacy kannur medical college-event-3.jpg',
+    'static/images/colleges/college of pharmacy kannur medical college-event-4.jpg',
+    'static/images/colleges/college of pharmacy kannur medical college-event-5.jpg'
+  ],
+  'Annual Convocation Ceremony'
+)}
+
+
       </div>
     </section>
   `;
 }
+
 
 function renderProfilePage() {
   const currentUserId = window.firebaseAuthUserId || 'Not Authenticated (fallback)';
@@ -622,3 +737,26 @@ async function initFirebase() {
     console.warn('Firebase init skipped or failed:', err);
   }
 }
+
+function initCollegeImageCarousels() {
+  const carousels = document.querySelectorAll('.college-image-carousel');
+
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.college-slide-track');
+    const slides = track.children;
+    let index = 0;
+
+    if (slides.length <= 1) return;
+
+    // 🎯 Random interval per card (2.5s to 6s)
+    const randomInterval =
+      Math.floor(Math.random() * (6000 - 2500 + 1)) + 2500;
+
+    setInterval(() => {
+      index = (index + 1) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }, randomInterval);
+  });
+}
+
+
