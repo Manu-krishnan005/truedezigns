@@ -16,7 +16,7 @@ const PRODUCTS = {
     name: 'Standard Student Gown',
     category: 'Student Gowns',
     designer: 'True Designs Exclusive',
-    images: ['/static/images/products/student-gown-1.jpg','/static/images/products/student-gown-2.jpg','/static/images/products/student-gown-3.jpg'],
+    images: ['/static/images/products/student-gown-1.jpg','/static/images/products/student-gown-2.jpg','/static/images/products/student-gown-3.jpg','/static/images/products/student-gown-4.jpg','/static/images/products/student-gown-5.jpg'],
     description: 'A classic black graduation gown suitable for all students. Comes with a matching cap and tassel.',
     rentalOptions: { durations: ['3 Days','5 Days'], sizes: ['XS','S','M','L','XL'] },
     keywords: ['student','gown','black','graduation','academic']
@@ -36,7 +36,11 @@ const PRODUCTS = {
     name: 'Faculty Gown',
     category: 'Faculty Gowns',
     designer: 'Prestigious Attire',
-    images: ['/static/images/products/faculty-gown-1.jpg'],
+    images: ['/static/images/products/faculty-gown-1.jpg',
+             '/static/images/products/faculty-gown-2.jpg',
+             '/static/images/products/faculty-gown-3.jpg',
+             '/static/images/products/faculty-gown-4.jpg'
+    ],
     description: 'A traditional red faculty gown.',
     rentalOptions: { durations: ['3 Days'], sizes: ['M','L'] },
     keywords: ['faculty','gown']
@@ -71,7 +75,14 @@ const PRODUCTS = {
     name: 'Customised Hoodies',
     category: 'Customised Hoodies',
     designer: 'True Dezigns Exclusive',
-    images: ['/static/images/products/stoles.jpg'],
+    images: [
+  '/static/images/products/stoles.jpg',
+  '/static/images/products/stoles-2.jpg',
+  '/static/images/products/stoles-3.jpg',
+  '/static/images/products/stoles-4.jpg',
+  '/static/images/products/stoles-5.jpg'
+],
+
     description: 'Personalised Hoodies for convocation ceremonies.',
     rentalOptions: { durations: ['3 Days'], sizes: ['Free Size'] },
     keywords: ['Hoodies','customised']
@@ -81,7 +92,10 @@ const PRODUCTS = {
     name: 'Framed Certificate with Medal Set',
     category: 'Framed Certificate with Medals',
     designer: 'True Designs',
-    images: ['/static/images/products/framed-certificate-1.jpg'],
+    images: ['/static/images/products/framed-certificate-1.jpg',
+        '/static/images/products/framed-certificate-2.jpg',
+        '/static/images/products/framed-certificate-3.jpg'
+    ],
     description: 'Beautifully framed certificate with medals.',
     rentalOptions: { durations: ['Permanent Purchase'] },
     keywords: ['certificate','medal']
@@ -252,13 +266,13 @@ function renderCategoryPage(categoryKey) {
     const formattedPrice = parseFloat(product.price || 0).toFixed(2);
     return `
   <div class="text-center gown-card">
-    <a href="#product/${product.key}" class="block group">
-          <div class="relative overflow-hidden rounded-lg aspect-[3/4]">
-            <img src="${product.images[0]}"
-     class="w-full h-full object-contain bg-white object-center"
-     alt="${product.name}">
+  <a href="#product/${product.key}" class="block group">
+    <div class="relative overflow-hidden rounded-lg h-[260px] md:h-[320px] bg-white flex items-center justify-center">
+      <img src="${product.images[0]}"
+           class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+           alt="${product.name}">
+    </div>
 
-          </div>
           <p class="text-sm font-semibold mt-2">${product.name}</p>
           <p class="text-xs text-gray-500">${product.designer}</p>
         </a>
@@ -325,13 +339,20 @@ function renderProductPage(productKey) {
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div id="product-image-container" class="relative overflow-hidden rounded-lg aspect-[3/4] shadow-lg">
-          ${imagesHtml}
-          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            ${images.map((_,i) => `<div class="thumbnail-dot h-1 w-6 rounded-full ${i===0 ? 'bg-white' : 'bg-gray-400 opacity-50'}"></div>`).join('')}
-          </div>
-          ${images.length>1 ? `<button id="prev-image" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">‹</button><button id="next-image" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/50 p-2 rounded-full">›</button>` : ''}
-        </div>
+        <div id="product-image-container"
+     class="relative overflow-hidden rounded-lg shadow-lg h-[480px]">
+
+  <div class="product-image-carousel">
+    <div class="product-slide-track">
+      ${images.map(img => `
+        <img src="${img}" class="product-slide-img" alt="${product.name}">
+      `).join('')}
+    </div>
+  </div>
+
+</div>
+
+
 
         <div>
           <p class="text-sm uppercase tracking-widest text-gray-500 mb-1">${product.designer}</p>
@@ -366,10 +387,6 @@ function renderProductPage(productKey) {
         </div>
       </div>
 
-      <div class="mt-20 border-t border-gray-200 pt-10">
-        <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Related Products</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">${relatedHtml}</div>
-      </div>
     </section>
   `;
 }
@@ -444,8 +461,9 @@ function renderPage(route = '') {
   contentDiv.innerHTML = content;
 
   if (routeType === 'product' && routeKey) {
-    initProductPageWiring(routeKey);
-  }
+  initProductPageWiring(routeKey);
+  initProductImageCarousel();
+}
 
   if (routeType === 'blog') {
   initCollegeImageCarousels();
@@ -524,10 +542,11 @@ function performSearch(query) {
 
   const resultHtml = matchingProducts.map(product => `
   <a
-    href="#product/${product.key}"
-    onclick="closeSearchAndNavigate()"
-    class="block group p-2 rounded-lg hover:bg-gray-50 transition duration-300"
-  >
+  href="#"
+  onclick="navigateFromSearch(event, '${product.key}')"
+  class="block group p-2 rounded-lg hover:bg-gray-50 transition duration-300"
+>
+
 
     <div class="relative overflow-hidden rounded-lg aspect-[3/4]">
       <img src="${product.images[0]}" class="w-full h-full object-cover object-center" alt="${product.name}">
@@ -538,14 +557,6 @@ function performSearch(query) {
 `).join('');
 
   resultsDiv.innerHTML = resultHtml;
-}
-
-function closeSearchAndNavigate() {
-  const searchOverlay = document.getElementById('search-overlay');
-  const searchInput = document.getElementById('search-input');
-
-  if (searchOverlay) searchOverlay.classList.remove('is-active');
-  if (searchInput) searchInput.value = '';
 }
 
 
@@ -889,6 +900,44 @@ function renderProfilePage() {
     </section>
   `;
 }
+
+function initProductImageCarousel() {
+  const track = document.querySelector('.product-slide-track');
+  if (!track) return;
+
+  const slides = track.children;
+  if (slides.length <= 1) return;
+
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }, 2500); // matches your video feel
+}
+
+
+function navigateFromSearch(event, productKey) {
+  event.preventDefault();
+
+  const searchOverlay = document.getElementById('search-overlay');
+  const searchInput = document.getElementById('search-input');
+
+  // Close search overlay
+  if (searchOverlay) {
+    searchOverlay.classList.remove('is-active');
+    searchOverlay.classList.add('hidden');
+  }
+
+  // Clear input
+  if (searchInput) {
+    searchInput.value = '';
+  }
+
+  window.location.hash = `product/${productKey}`;
+}
+window.navigateFromSearch = navigateFromSearch;
+
 
 /* ---------- INITIALIZATION ---------- */
 document.addEventListener('DOMContentLoaded', () => {
