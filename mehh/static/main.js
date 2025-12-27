@@ -413,6 +413,21 @@ function renderPage(route = '') {
       else content = renderCategoryPage(catKey);
       break;
     }
+
+    case 'legal':
+  if (routeKey === 'terms') {
+    content = renderTermsAndConditionsPage();
+  } else if (routeKey === 'privacy') {
+    content = renderPrivacyPolicyPage();
+  } else {
+    content = `<section class="py-20 text-center">
+      <h2 class="section-title text-4xl mb-4">Legal</h2>
+      <p class="text-gray-600">Content coming soon</p>
+    </section>`;
+  }
+  break;
+
+
     case 'product':
       content = renderProductPage(routeKey);
       break;
@@ -422,6 +437,7 @@ function renderPage(route = '') {
     default:
       content = `<section class="py-20 text-center"><h2 class="section-title text-4xl mb-4">${(routeType || 'Page').charAt(0).toUpperCase() + (routeType || 'page').slice(1)}</h2><p class="text-gray-600">Content coming soon</p></section>`;
       break;
+
   }
 
   setTimeout(() => {
@@ -507,7 +523,12 @@ function performSearch(query) {
   }
 
   const resultHtml = matchingProducts.map(product => `
-  <a href="#product/${product.key}" class="block group p-2 rounded-lg hover:bg-gray-50 transition duration-300">
+  <a
+    href="#product/${product.key}"
+    onclick="closeSearchAndNavigate()"
+    class="block group p-2 rounded-lg hover:bg-gray-50 transition duration-300"
+  >
+
     <div class="relative overflow-hidden rounded-lg aspect-[3/4]">
       <img src="${product.images[0]}" class="w-full h-full object-cover object-center" alt="${product.name}">
     </div>
@@ -519,23 +540,230 @@ function performSearch(query) {
   resultsDiv.innerHTML = resultHtml;
 }
 
+function closeSearchAndNavigate() {
+  const searchOverlay = document.getElementById('search-overlay');
+  const searchInput = document.getElementById('search-input');
+
+  if (searchOverlay) searchOverlay.classList.remove('is-active');
+  if (searchInput) searchInput.value = '';
+}
+
+
 /* ---------- FRAGMENT PAGES ---------- */
 function renderAboutForCausePage() {
   return `
-    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-      <div class="relative h-96 w-full rounded-lg overflow-hidden">
-        <img src="https://placehold.co/960x600/b13b4e/ffffff?text=RENT+FOR+A+CAUSE" class="w-full h-full object-cover" alt="Rent For A Cause">
-        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <h2 class="section-title text-white">RENT FOR A CAUSE</h2>
-        </div>
+    <section class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+      <h1 class="text-4xl font-bold tracking-tight text-center">
+        Rent for a Cause
+      </h1>
+
+      <article class="prose prose-lg max-w-none mx-auto text-gray-800">
+        <p>
+          Graduation is a milestone — a moment of pride, achievement, and new beginnings.
+          Yet behind the celebration lies a silent issue: wasteful fashion consumption.
+        </p>
+
+        <p>
+          At <strong>True Dezigns</strong>, we believe that celebrating success doesn’t have
+          to come at the cost of our planet. This belief gave rise to
+          <strong>Rent for a Cause</strong>.
+        </p>
+
+        <h2>The Problem with One-Time Fashion</h2>
+        <p>
+          Graduation gowns are often worn once and forgotten. This contributes to
+          unnecessary textile waste and environmental harm.
+        </p>
+
+        <h2>A Smarter Way to Celebrate</h2>
+        <p>
+          Renting gowns reduces waste, extends garment life, and promotes
+          sustainable fashion without sacrificing elegance.
+        </p>
+
+        <blockquote>
+          Celebrate your achievement. Honor the planet.
+        </blockquote>
+
+        <p>
+          Every rental is a step toward a more responsible future.
+        </p>
+      </article>
+
+      <div class="text-center">
+        <a href="https://medium.com/@manukrishnankess/rent-for-a-cause-how-fashion-can-make-a-difference-158b8439ac4a"
+           target="_blank"
+           class="inline-block bg-black text-white px-6 py-3 rounded-lg uppercase tracking-wider text-sm hover:bg-gray-800 transition">
+          Read Full Article on Medium
+        </a>
       </div>
-      <div class="bg-purple-200 text-center p-6 rounded-lg">
-        <h2 class="text-3xl font-bold">About Our Cause</h2>
-        <p class="text-gray-600">We believe fashion can make a difference.</p>
-      </div>
+
     </section>
   `;
 }
+
+function renderTermsAndConditionsPage() {
+  return `
+    <section class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+
+      <h1 class="text-4xl font-bold tracking-tight text-center">
+        Terms & Conditions
+      </h1>
+
+      <p class="text-sm text-gray-500 text-center">
+        Last updated: ${new Date().getFullYear()}
+      </p>
+
+      <article class="prose prose-lg max-w-none text-gray-800">
+
+        <h2>1. Introduction</h2>
+        <p>
+          Welcome to <strong>True Dezigns</strong>. By accessing or using our website,
+          products, or services, you agree to comply with and be bound by these
+          Terms & Conditions.
+        </p>
+
+        <h2>2. Services</h2>
+        <p>
+          True Dezigns provides rental and purchase services for graduation gowns,
+          ceremonial attire, and related accessories. All services are subject
+          to availability and confirmation.
+        </p>
+
+        <h2>3. Rental Policy</h2>
+        <p>
+          Rental items must be returned in the condition in which they were provided.
+          Any damage, loss, or delay in return may result in additional charges.
+        </p>
+
+        <h2>4. Orders & Payments</h2>
+        <p>
+          Orders are confirmed only after successful communication and agreement
+          via our official channels. Prices and rental durations are subject to change
+          without prior notice.
+        </p>
+
+        <h2>5. Cancellations & Refunds</h2>
+        <p>
+          Cancellation requests must be made in advance. Refund eligibility depends
+          on the stage of order processing and is decided at the discretion of
+          True Dezigns.
+        </p>
+
+        <h2>6. Usage Restrictions</h2>
+        <p>
+          Users must not misuse our website or services. Any unlawful activity,
+          including but not limited to fraud or misuse of content, is strictly prohibited.
+        </p>
+
+        <h2>7. Intellectual Property</h2>
+        <p>
+          All content, designs, logos, and images on this website are the intellectual
+          property of True Dezigns and may not be reused without written permission.
+        </p>
+
+        <h2>8. Limitation of Liability</h2>
+        <p>
+          True Dezigns shall not be liable for any indirect, incidental, or consequential
+          damages arising from the use of our services.
+        </p>
+
+        <h2>9. Modifications</h2>
+        <p>
+          We reserve the right to modify these Terms & Conditions at any time.
+          Continued use of our services constitutes acceptance of the updated terms.
+        </p>
+
+        <h2>10. Contact Information</h2>
+        <p>
+          For any questions regarding these Terms & Conditions, please contact us at
+          <strong>truedesignstvm@gmail.com</strong>.
+        </p>
+
+      </article>
+    </section>
+  `;
+}
+
+function renderPrivacyPolicyPage() {
+  return `
+    <section class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+
+      <h1 class="text-4xl font-bold tracking-tight text-center">
+        Privacy Policy
+      </h1>
+
+      <p class="text-sm text-gray-500 text-center">
+        Last updated: ${new Date().getFullYear()}
+      </p>
+
+      <article class="prose prose-lg max-w-none text-gray-800">
+
+        <h2>1. Introduction</h2>
+        <p>
+          At <strong>True Dezigns</strong>, we respect your privacy and are committed
+          to protecting the personal information you share with us.
+        </p>
+
+        <h2>2. Information We Collect</h2>
+        <p>
+          We may collect personal information such as your name, email address,
+          phone number, and order details when you interact with our website
+          or services.
+        </p>
+
+        <h2>3. How We Use Your Information</h2>
+        <ul>
+          <li>To process rental or purchase inquiries</li>
+          <li>To communicate order-related information</li>
+          <li>To improve our products and services</li>
+          <li>To provide customer support</li>
+        </ul>
+
+        <h2>4. Data Protection</h2>
+        <p>
+          We implement appropriate security measures to protect your personal
+          data from unauthorized access, disclosure, or misuse.
+        </p>
+
+        <h2>5. Third-Party Services</h2>
+        <p>
+          We may use trusted third-party services (such as payment processors
+          or communication platforms) solely to support our operations.
+          These parties are obligated to protect your information.
+        </p>
+
+        <h2>6. Cookies</h2>
+        <p>
+          Our website may use cookies to enhance user experience and analyze
+          website performance. You may disable cookies in your browser settings
+          if you prefer.
+        </p>
+
+        <h2>7. User Rights</h2>
+        <p>
+          You have the right to request access, correction, or deletion of your
+          personal data by contacting us.
+        </p>
+
+        <h2>8. Policy Updates</h2>
+        <p>
+          This Privacy Policy may be updated periodically. Any changes will be
+          reflected on this page.
+        </p>
+
+        <h2>9. Contact Us</h2>
+        <p>
+          If you have any questions regarding this Privacy Policy, please contact us at
+          <strong>truedesignstvm@gmail.com</strong>.
+        </p>
+
+      </article>
+    </section>
+  `;
+}
+
 
 function renderContactUsPage() {
   return `
