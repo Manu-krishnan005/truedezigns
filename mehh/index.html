@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="google-site-verification" content="BqSvUzXDJhFVWE8LE-iA7YQymeL5JYqnbMOO9IrybE8" />
+    <title>True Dezigns</title>
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+
+    <!-- External assets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+    <!-- Search overlay -->
+    <div id="search-overlay" class="hidden fixed inset-0 z-50 bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col h-full">
+            <div class="relative flex items-center mb-8 border-b border-gray-300 pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="search-input" class="w-full text-3xl font-light focus:outline-none placeholder-gray-400 tracking-wider" placeholder="Search">
+                <button id="close-search-btn" class="p-2 text-gray-500 hover:text-black transition duration-300" aria-label="Close search">&times;</button>
+            </div>
+
+            <div id="search-results" class="overflow-y-auto flex-grow grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"></div>
+        </div>
+    </div>
+
+        
+
+    <!-- Cart modal -->
+    <div id="cart-overlay" class="modal-overlay hidden fixed inset-0 z-50 bg-black/40">
+        <div id="cart-modal-container" class="flex flex-col h-full p-6 max-w-3xl mx-auto">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                <h2 class="text-2xl font-bold tracking-tight">Shopping Bag</h2>
+                <button id="close-cart-modal" class="text-gray-500 text-3xl font-light hover:text-black">&times;</button>
+            </div>
+
+            <div id="cart-items-list" class="flex-grow overflow-y-auto py-6 space-y-4"></div>
+
+            <div class="pt-4 border-t border-gray-200">
+                
+                <button id="checkout-btn"
+  onclick="checkoutViaWhatsApp()"
+  class="w-full bg-black text-white font-medium text-sm tracking-widest py-3 rounded-lg hover:bg-gray-800 transition duration-300 uppercase">
+  Checkout
+</button>
+
+                <button id="add-more-items-btn" class="w-full mt-2 text-sm font-medium uppercase tracking-wider border border-black py-2 rounded-lg hover:bg-gray-100 transition duration-300">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top announcement -->
+    <div class="bg-gray-900 text-white text-center py-2 text-sm tracking-wide">
+         <a href="#" class="underline hover:text-gray-300 transition duration-300"></a>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="sticky top-0 bg-white shadow-sm z-40">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <div class="flex items-center space-x-3 cursor-pointer"
+     onclick="window.location.hash = 'home'">
+
+    <!-- Logo Image -->
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+     alt="True Dezigns Logo"
+     class="h-16 w-auto object-contain">
+
+</div>
+
+            </div>
+
+            <div class="hidden lg:flex space-x-8 h-full items-center">
+                <div class="relative group h-full flex items-center">
+                    <a href="#category/gowns" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300 py-2 nav-link">Gowns</a>
+                    <div class="mega-menu absolute top-full mt-0 w-[400px] bg-white border border-gray-200 shadow-xl p-8 flex justify-around hidden group-hover:block">
+                        <div>
+                            <p class="font-bold text-sm uppercase mb-3">TYPES</p>
+                            <ul class="text-sm space-y-2">
+                                <li><a href="#category/student-gowns" class="hover:text-gray-500 nav-link">Student Gowns</a></li>
+                                <li><a href="#category/kids-gowns" class="hover:text-gray-500 nav-link">Kids Gowns</a></li>
+                                <li><a href="#category/guest-gowns" class="hover:text-gray-500 nav-link">Guest Gowns</a></li>
+                                <li><a href="#category/faculty-gowns" class="hover:text-gray-500 nav-link">Faculty Gowns</a></li>
+                                <li><a href="#category/phd-gowns" class="hover:text-gray-500 nav-link">PhD Gowns</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm uppercase mt-6 mb-3">ACCESSORIES</p>
+                            <ul class="text-sm space-y-2">
+                                <li><a href="#category/customised-Hoodies" class="hover:text-gray-500 nav-link">Customised Hoodies</a></li>
+                                <li><a href="#category/framed-certificate" class="hover:text-gray-500 nav-link">Framed Certificate with Medals</a></li>
+                                <li><a href="#category/convocation-files" class="hover:text-gray-500 nav-link">Convocation Files</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group h-full flex items-center">
+                    <a href="#cause/gowns" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300">Contact Us</a>
+                    <div class="mega-menu absolute top-full mt-0 w-48 bg-white border border-gray-200 shadow-xl p-4 hidden group-hover:block">
+                        <ul class="text-sm space-y-2">
+                            <li><a href="#cause/about" class="hover:text-gray-500 nav-link"></a></li>
+                            <li><a href="#cause/gowns" class="hover:text-gray-500 nav-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="#blog" class="text-sm font-medium uppercase tracking-wider hover:text-gray-600 transition duration-300 nav-link">Collaborations</a>
+            </div>
+
+            <div class="flex items-center space-x-4 text-gray-800">
+                <button aria-label="Search" id="open-search-btn" class="p-2 rounded-full hover:bg-gray-100 transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            
+                <button aria-label="Shopping Bag" id="open-cart-modal" class="relative p-2 rounded-full hover:bg-gray-100 transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">0</span>
+                </button>
+
+                <button id="mobile-menu-btn" aria-label="Open Menu" class="lg:hidden p-2 rounded-full hover:bg-gray-100 transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 z-50 bg-white p-6 pt-24 space-y-4 shadow-2xl transition duration-300 transform translate-x-full">
+        <a href="#cause/about" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">About</a>
+        <a href="#category/gowns" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">Gowns</a>
+        <a href="#blog" class="block text-lg font-medium uppercase tracking-wider hover:text-gray-600 nav-link">Collaborations</a>
+    </div>
+
+    <main>
+        <div id="home-content-container">
+            <!-- HERO -->
+            <section class="relative h-[650px] overflow-hidden">
+                <div class="absolute inset-0">
+                    <img src="{{ url_for('static', filename='images/hero.jpg') }}" class="w-full h-full object-cover object-center" alt="Hero banner">
+                </div>
+
+                <div class="hero-content flex items-center justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="text-white pt-24 md:pt-0">
+                        <h1 class="hero-title text-5xl font-extrabold leading-tight">THE FUTURE OF YOUR <br> WARDROBE</h1>
+                        <div class="mt-8 flex space-x-4">
+                            <button class="bg-white text-black font-medium text-sm tracking-widest py-3 px-6 rounded-lg shadow-lg hover:bg-gray-200 transition duration-300 uppercase" onclick="window.location.hash = 'category/student-gowns'">Rent Student Gowns</button>
+                            <button class="bg-black text-white font-medium text-sm tracking-widest py-3 px-6 rounded-lg shadow-lg hover:bg-gray-800 transition duration-300 uppercase" onclick="window.location.hash = 'category/faculty-gowns'">Rent Faculty Gowns</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Two featured category cards -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 px-4 sm:px-6 lg:px-8">
+                <a href="#category/student-gowns" class="relative category-card overflow-hidden rounded-lg h-96 group">
+                    <div class="absolute inset-0">
+                        <img src="{{ url_for('static', filename='images/home-student.jpg') }}" class="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-105" alt="Student Gowns">
+                    </div>
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition duration-300"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <h2 class="section-title text-white text-4xl">FOR STUDENTS</h2>
+                    </div>
+                </a>
+
+                <a href="#category/faculty-gowns" class="relative category-card overflow-hidden rounded-lg h-96 group">
+                    <div class="absolute inset-0">
+                        <img src="{{ url_for('static', filename='images/home-faculty.jpg') }}" class="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-105" alt="Faculty Gowns">
+                    </div>
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition duration-300"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <h2 class="section-title text-white text-4xl">FOR FACULTY</h2>
+                    </div>
+                </a>
+            </section>
+
+            <!-- Info / Steps -->
+            <section class="py-14 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 bg-gray-700 text-white">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-hand-pointer text-4xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold uppercase tracking-wider mb-2">1. MAKE YOUR CHOICE</h3>
+                        <p class="text-gray-300 text-sm">Browse through our exclusive collection and pick an outfit to lease with ease.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-ruler-combined text-4xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold uppercase tracking-wider mb-2">2. THE DREAM FIT</h3>
+                        <p class="text-gray-300 text-sm">Select your size, the preferred duration and the date of delivery.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <i class="fa-solid fa-shirt text-4xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold uppercase tracking-wider mb-2">3. STYLE YOUR LOOK</h3>
+                        <p class="text-gray-300 text-sm">Amp up your game with accessories from our specially curated collection to complement your look.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW ARRIVALS -->
+            <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">NEW ARRIVALS</p>
+                <h2 class="section-title mb-10 text-3xl font-bold">The Latest Scoop</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="md:pr-10 flex flex-col justify-center">
+                        <p class="text-gray-600 mb-6">Get ready for your big day with our newest additions — now including kids gowns for the little scholars.</p>
+                        <div class="flex space-x-4">
+                            <button class="w-40 bg-black text-white font-medium text-sm py-3 px-6 rounded-lg hover:bg-gray-800 transition duration-300 uppercase" onclick="window.location.hash='category/student-gowns'">RENT STUDENTS</button>
+                            <button class="w-40 bg-white text-black font-medium text-sm py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300 uppercase" onclick="window.location.hash='category/kids-gowns'">RENT KIDS</button>
+                        </div>
+
+                        <div class="mt-12">
+                            <p class="text-base font-semibold">Premium Kids Graduation Dress</p>
+                            <p class="text-gray-700 text-sm"></p>
+                        </div>
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="{{ url_for('static', filename='images/newarrival.jpg') }}" class="w-full h-full object-cover object-center" alt="New Arrival">
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLLECTION & ACCESSORIES -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Student collection (large) -->
+                    <a href="#category/student-gowns" class="relative category-card overflow-hidden rounded-lg sm:col-span-2 aspect-[16/9] group">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/collection-student.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Student Collection">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <p class="text-xs uppercase tracking-widest mb-1 text-white">GRADUATION DAY READY</p>
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">The Student Gown Collection</h3>
+                        </div>
+                    </a>
+
+                    <!-- Guest Gowns -->
+                    <a href="#category/guest-gowns" class="relative category-card overflow-hidden rounded-lg h-96 group hidden lg:block">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/guest-gowns.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Guest Gowns">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Guest Gowns</h3>
+                        </div>
+                    </a>
+
+                    <!-- Faculty Gowns -->
+                    <a href="#category/faculty-gowns" class="relative category-card overflow-hidden rounded-lg h-96 group">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/faculty-gowns.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Faculty Gowns">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Faculty Gowns</h3>
+                        </div>
+                    </a>
+
+                    <!-- Kids Gown (show as its own card) -->
+                    <a href="#category/kids-gowns" class="relative category-card overflow-hidden rounded-lg h-96 group">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/kids-gown.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Kids Gowns">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Kids Gowns</h3>
+                        </div>
+                    </a>
+
+                    <!-- Accessories row (3 items): customised Hoodies, framed certificates, convocation files -->
+                    <a href="#category/customised-Hoodies" class="relative category-card overflow-hidden rounded-lg group">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/products/stoles.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Customised Shawls" onerror="this.src='{{ url_for('static', filename='images/default-accessory.jpg') }}'">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <p class="text-xs uppercase tracking-widest mb-1 text-white">ACCENTS & ACCESSORIES</p>
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Customised Hoodies</h3>
+                        </div>
+                    </a>
+
+                    <a href="#category/framed-certificate" class="relative category-card overflow-hidden rounded-lg group">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/products/framed-certificate-1.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Framed Certificate" onerror="this.src='{{ url_for('static', filename='images/default-accessory.jpg') }}'">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Framed Certificate with Medals</h3>
+                        </div>
+                    </a>
+
+                    <a href="#category/convocation-files" class="relative category-card overflow-hidden rounded-lg group">
+                        <div class="absolute inset-0">
+                            <img src="{{ url_for('static', filename='images/products/convocation-file-1.jpg') }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" alt="Convocation Files" onerror="this.src='{{ url_for('static', filename='images/default-accessory.jpg') }}'">
+                        </div>
+                        <div class="absolute inset-0 bg-black/30 transition duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <h3 class="text-xl font-bold uppercase tracking-wider text-white">Convocation Files</h3>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- App content (dynamic pages rendered by main.js) -->
+        <div id="app-content" class="hidden min-h-[80vh] flex items-center justify-center"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
+                <div>
+                    <h4 class="text-sm font-bold uppercase mb-4 tracking-wider">Help</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#cause/gowns" class="hover:text-white nav-link">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase mb-4 tracking-wider">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><a href="#cause/about" class="hover:text-white nav-link">About Us</a></li>
+                        <li>
+  <a href="#legal/terms" class="hover:text-white nav-link">
+    Terms & Conditions
+  </a>
+</li>
+
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase mb-4 tracking-wider">Connect</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>
+  <a href="https://www.instagram.com/truedesignsconvo?igsh=ZHlwbTQ3a296ZHN0"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="hover:text-white flex items-center">
+     
+     <i class="fa-brands fa-instagram mr-2"></i>
+     Instagram
+
+  </a>
+</li>
+
+</li>
+
+                        <li>
+   <a href="https://www.facebook.com/profile.php?id=61575041672717"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="hover:text-white flex items-center">
+     
+     <i class="fa-brands fa-facebook mr-2"></i>
+     Facebook
+  </a>
+</li>
+
+                        <li>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=truedesignstvm@gmail.com"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="hover:text-white flex items-center">
+
+    <i class="fa-solid fa-envelope mr-2"></i>
+    Email Us
+
+  </a>
+</li>
+
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold uppercase mb-4 tracking-wider">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>
+  <a href="#legal/privacy" class="hover:text-white nav-link">
+    Privacy Policy
+  </a>
+</li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center text-sm text-gray-500">
+                &copy; 2025 True Dezigns. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JS (module) -->
+    <script type="module" src="{{ url_for('static', filename='main.js') }}"></script>
+
+    <!-- Floating WhatsApp Chat Button -->
+<a href="https://wa.me/919745845989"
+   target="_blank"
+   class="whatsapp-float"
+   aria-label="Chat with us on WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+</body>
+</html>
