@@ -26,7 +26,10 @@ const PRODUCTS = {
     name: 'Guest Gown',
     category: 'Guest Gowns',
     designer: 'Elegant Wear',
-    images: ['/static/images/products/guest-gown-1.jpg'],
+    images: ['/static/images/products/guest-gown-1.jpg',
+             '/static/images/products/guest-gown-2.jpg',
+              '/static/images/products/guest-gown-3.jpg'
+    ],
     description: 'A stylish blue gown for guests and attendees.',
     rentalOptions: { durations: ['3 Days','5 Days'], sizes: ['M','L','XL'] },
     keywords: ['guest','gown','ceremony']
@@ -61,7 +64,7 @@ const PRODUCTS = {
   name: 'Standard PhD Gown',
   category: 'PhD Gowns',
   designer: 'True Designs Prestige',
-  images: ['/static/images/products/phd-gown-1.jpg'],
+  images: ['/static/images/products/phd-gown-1.jpg','/static/images/products/phd-gown-2.jpg'],
   description: 'Premium PhD graduation gown designed for doctoral ceremonies with elegant detailing.',
   rentalOptions: {
     durations: ['3 Days', '5 Days'],
@@ -90,7 +93,7 @@ const PRODUCTS = {
   'framed-certificate-1': {
     key: 'framed-certificate-1',
     name: 'Framed Certificate with Medal Set',
-    category: 'Framed Certificate with Medals',
+    category: 'Framed Certificates',
     designer: 'True Designs',
     images: ['/static/images/products/framed-certificate-1.jpg',
         '/static/images/products/framed-certificate-2.jpg',
@@ -120,7 +123,7 @@ const CATEGORY_MAP = {
   'kids-gowns': { title: 'Kids Gowns', productKeys: ['kids-gown-standard'] },
   'phd-gowns': {title: 'PhD Gowns',productKeys: ['phd-gown-black']},
   'customised-Hoodies': { title: 'Customised Hoodies', productKeys: ['customised-Hoodies-1'] },
-  'framed-certificate': { title: 'Framed Certificate with Medals', productKeys: ['framed-certificate-1'] },
+  'framed-certificates': { title: 'Framed Certificates', productKeys: ['framed-certificate-1'] },
   'convocation-files': { title: 'Convocation Files', productKeys: ['convocation-file-1'] },
   'gowns': { title: 'All Gowns', productKeys: ['student-gown-black','guest-gown','faculty-gown','kids-gown-standard','phd-gown-black'] },
   'default': { title: 'Product Listing', productKeys: Object.keys(PRODUCTS) }
@@ -941,6 +944,10 @@ window.navigateFromSearch = navigateFromSearch;
 
 /* ---------- INITIALIZATION ---------- */
 document.addEventListener('DOMContentLoaded', () => {
+
+  const route = window.location.hash.substring(1) || 'home';
+  renderPage(route); // ✅ RUN ON INITIAL LOAD
+
   window.addEventListener('hashchange', () => {
     const route = window.location.hash.substring(1) || 'home';
     renderPage(route);
